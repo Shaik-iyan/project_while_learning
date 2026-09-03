@@ -1,0 +1,29 @@
+h1{
+    color:rgb(9, 120, 120);
+}
+body{
+    background: rgba(255, 255, 255, 0.863);
+    margin: 50px;
+    padding:20px;
+    box-shadow: 10px;
+}
+main{
+    background: rgb(213, 233, 214);
+    padding: 30px;
+    box-shadow: 0 0 10px gray;
+}
+header{
+    display:flex;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    font-family: arial,sans-serif;
+    font-style: italic;
+}
+a{
+    padding: 30px;
+    color: rgb(9, 120, 120);
+}
+h4{
+    color:rgb(9, 120, 120);
+}
