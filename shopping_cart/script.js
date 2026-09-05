@@ -42,9 +42,11 @@ function addToCart(productId){
     const selectedProduct=products.find(
         product=>product.id===productId
     );
+
     const cartItem=cart.find(
         product=>product.id===productId
     );
+    
     if(cartItem){
         cartItem.quantity++;
     }else{
