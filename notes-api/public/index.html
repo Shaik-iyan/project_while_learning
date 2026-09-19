@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Create Note</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                background: #f2f2f2;
+                padding: 30px;
+            }
+            .container{
+                max-width: 500px;
+                margin: auto;
+                background: white;
+                padding: 25px;
+                border-radius: 10px;
+            }
+            input,textarea{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 12px;
+                margin: 8px 0 15px;
+            }
+            textarea{
+                height: 120px;
+            }
+            button{
+                width:100%;
+                padding: 12px;
+                background: black;
+                color:white;
+                border:none;
+                cursor:pointer;
+            }
+            button:hover{
+                background: #333;
+            }
+            #message{
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Create Note</h1>
+            <form id="noteForm">
+                <label>Title</label>
+                <input 
+                type="text"
+                id="title"
+                placeholder="enter note title">
+                <label>Content</label>
+                <textarea id="content"
+                placeholder="Enter note content"></textarea>
+                <button type="submit">create Note</button>
+
+            </form>
+            <p id="message"></p>
+        </div>
+        <script>
+            const form=document.getElementById("noteForm");
+            form.addEventListener("submit",async function(event){
+                event.preventDefault();
+                const title=document.getElementById("title").value;
+                const content=document.getElementById("content").value;
+                const note={
+                    title:title,
+                    content:content
+                };
+                try{
+                    const response=await fetch("/notes",{
+                        method:"POST",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body:JSON.stringify(note)
+                    });
+                    const data=await response.json();
+                    if(response.ok){
+                        document.getElementById("message").textContent="Done:"+data.message;
+                        console.log("Created note",data.note);
+                        form.reset();
+                    }else{
+                        document.getElementById("message").textContent="Faild"+data.message;
+                    }
+                }catch(error){
+                    console.error(error);
+                    document.getElementById("message").textContent="! Server Error ";
+                }
+            });
+        </script>
+    </body>
+</html>
